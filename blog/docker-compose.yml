@@ -1,0 +1,52 @@
+version: "1"
+services:
+#  app:
+#    build:
+#      context: .
+#      dockerfile: ./docker/local/Dockerfile
+#    tty: true
+#    stdin_open: true
+#    volumes:
+#      - ./:/go/src/app
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - db
+#    container_name: calchez-backend
+  db:
+    image: mysql/mysql-server:8.0.32-1.2.11-server
+    container_name: blog-mysql
+    restart: always
+    ports:
+      - "4306:3306"
+    environment:
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=blog_local
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - blog-mysql-data:/var/lib/mysql
+      - ./docker/mysql/config/my.cnf:/etc/mysql/my.cnf
+#  migrate:
+#    build:
+#      context: ./docker/migrate
+#      dockerfile: Dockerfile
+#    container_name: calchez-migrate
+#    environment:
+#      WAIT_HOSTS: db:3306
+#      MIGRATIONS_DIR: /migrations
+#      MYSQL_HOST: db
+#      MYSQL_PORT: 3306
+#      DB_DATABASE_NAME: calchez_local
+#      DB_USER: root
+#      DB_PASSWORD: rootpassword
+#    # restart: on-failure:10 # dbが立ち上がるまで、失敗するので、リトライ処理を入れる
+#    volumes:
+#      - ./migrate/migrations:/migrations
+#    depends_on:
+#      - db
+volumes:
+  blog-mysql-data:
+    external: true
