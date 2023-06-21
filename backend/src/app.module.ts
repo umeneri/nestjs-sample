@@ -9,13 +9,11 @@ import { UsersResolver } from './resolvers/users.resolver';
 import { PostsModule } from './components/posts/posts.module';
 import * as path from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import configuration from '../config/configuration';
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [configuration],
-    }),
+    ConfigModule.forRoot({}),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: false,
