@@ -6,3 +6,6 @@ codegen
 https://zenn.dev/nbstsh/scraps/f01024249984de
 
 https://qiita.com/pure-adachi/items/f1e03941e8c0ac47c7ee
+
+format
+https://zenn.dev/hungry_goat/articles/b7ea123eeaaa44
